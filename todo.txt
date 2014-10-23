@@ -1,0 +1,10 @@
+Currently know to-dos:
+- Obtain data/investigate data structure
+  - Can we get Cosmos/Hubble data from data challenge?
+  - Assume N-band photometry and shape/resolution information, choose 2-3 ML methods
+    - Supervised Discriminative: Regression, etc
+    - Supervised Generative: GDA, etc
+    - Other: SVM, etc
+  - Establish training and classifying, what is truth, etc
+
+Basically each person implements (at least) one method; we want to throw the book at this problem
