@@ -1,0 +1,32 @@
+# Some file extensions might be irrelevant, but it doesn't really hurt.
+
+# OS X
+*.DS_Store
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Eclipse
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.classpath
+.project
+*.launch
+
+# Emacs
+*~
+\#*\#
+*.elc
+auto-save-list
+tramp
+.\#*
+

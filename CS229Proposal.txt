@@ -1,0 +1,16 @@
+﻿Star/Galaxy Separation in the Era of Precision Cosmology
+
+
+Michael Baumer, Noah Kurinsky, and Max Zimet
+
+
+Large-scale observations of stars and galaxies throughout our universe have significant implications for our understanding of both galaxy evolution and cosmology. Upcoming astronomical surveys will image such distant galaxies that it will be difficult to tell them apart from stars simply by their appearance, as both stars and faraway galaxies will look like smudged points. It is, however, important to be able to separate samples of stars from galaxies, as the analyses we wish to apply to each differ greatly. “Star/galaxy separation” is therefore a critical first step in any cosmological analysis to avoid contaminating galaxy samples with stars or vice versa. 
+Spectroscopic data (measurements of frequency spectra of sources) allow easy differentiation of stars and galaxies, but collecting such data takes much more time than collecting photometric data (simple flux measurements through color filters), and will not scale up to meet the needs of upcoming massive galaxy surveys. We therefore wish to use supervised and unsupervised learning techniques to use photometric data as features for classifying astronomical sources as stars or galaxies. 
+The application of machine learning techniques to data processing for astronomical surveys has been a research topic in astronomy for several years [1,2,3]. While traditional methods selected only the most obvious stars and galaxies, several recent works have focused on applying individual machine learning techniques to star/galaxy separation (see e.g. [3]). We plan to conduct a systematic comparison of multiple classification methods drawn from the course. We will also build on previous results with an eye toward upcoming galaxy surveys by focusing on using features that are easy to extract from simple photometric data. 
+The data for this project will come from the Sloan Digital Sky Survey (SDSS), which has collected photometric and spectroscopic data for millions of astronomical objects. The SDSS catalog is well-organized and publicly available (http://www.sdss.org/), so we’ll be able to get started quickly with our analysis. The SDSS spectral classification of stars and galaxies will provide training data for our learning algorithms, and it also will provide a validation set. SDSS also collected photometric data similar to that which upcoming surveys will produce, and will therefore provide relevant input features for our fully-photometric learning analysis.
+
+
+References:
+[1] Henrion et. al. 2011, “A Bayesian Approach to Star-Galaxy Classification”, Monthly Notices of the Royal Astronomical Society, (2011) 412 (4): 2286-2302 (arXiv:1011.5770)
+[2] Fadley et. al. 2012, “Star-Galaxy Classification in Multi-Band Optical Imaging”, The Astrophysical Journal, Volume 760, Issue 1, Article 15 (arXiv:1206.4306)
+[3] Soumagnac et. al. 2014, “Star/Galaxy Separation at Faint Magnitudes: Application to a Simulated Dark Energy Survey”, submitted to MNRAS (arXiv:1306.5236)
