@@ -1,5 +1,7 @@
 # Some file extensions might be irrelevant, but it doesn't really hurt.
 
+Data/
+
 # OS X
 *.DS_Store
 
