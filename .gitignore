@@ -1,6 +1,9 @@
 # Some file extensions might be irrelevant, but it doesn't really hurt.
 
 Data/
+round1/
+round2/
+round3/
 
 # OS X
 *.DS_Store

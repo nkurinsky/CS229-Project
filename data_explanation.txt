@@ -1,0 +1,28 @@
+The FITS headers are currently not annotated with what all the data actually means—here’s my decoding of everything I know. Others I will be able to find out next week when Eli (expert on this data at SLAC) returns.
+
+Two key things:
+	DES uses five filter bands: g,r,i,z, and Y. Most quantities are measured in each individual band, indicated by suffixes.
+	In pixel coordinates, distances/positions are measured in pixels in the camera plane. Sky or “world” coordinates are given on sky, with distances measured in degrees/arcmin/arcsec 
+
+ra, dec = position of object in sky coordinates
+a_image, b_image = semi major and semi minor axes of object in pixel coordinates
+class_star = baseline star-galaxy separation classification (not sure on details)
+fwhm = full width half max of object
+x2win, y2win, xywin = 2nd image moments of object
+mag_aper_XXX = source magnitude measured by aperture photometry with a diameter of XXX pixels
+mu_mean, mu_max = ???
+zero point = photometric calibration level (what number of counts means zero flux?)
+flags_XXX = ???                  
+chi2_detmodel, chi2_model = I’m pretty sure this is the chi-sq for a galaxy-like light profile (model) and a star-like profile (detmodel), but I’m not sure — will check
+niter_model, niter_detmodel = number of iterations for convergence of profile fit (?)
+nlowweight = ?                       
+obs_XX = ?
+zp_shift = ?                        
+mag_auto flux_auto = Source magnitude (flux) from Sextractor’s best fit aperture.                     
+mag_model, mag_detmodel = ?                     
+spread_model = ?      
+
+Don’t use in training:
+modest_class = somewhat better (machine learning based?) algorithm for star-galaxy separation, for comparison.
+true_class = “true” classification as star or galaxy (0=galaxy, 1=star)
+catalog_id = source of “truth” info. restrict to catalog_id = 10 for HST-COSMOS field. 
