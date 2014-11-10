@@ -1,5 +1,6 @@
 # Some file extensions might be irrelevant, but it doesn't really hurt.
 
+Data/
 round1/
 round2/
 round3/
@@ -25,6 +26,8 @@ local.properties
 .classpath
 .project
 *.launch
+.metadata
+.pydevproject
 
 # Emacs
 *~
@@ -34,3 +37,7 @@ auto-save-list
 tramp
 .\#*
 
+libsvm-3.19/svm-predict
+libsvm-3.19/svm-scale
+libsvm-3.19/svm-train
+libsvm-3.19/svm.o
