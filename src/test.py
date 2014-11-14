@@ -5,6 +5,7 @@ import warnings
 import math
 warnings.filterwarnings('error')
 
+"""
 f = pyfits.open("../Data/round1/round1_test_set.fits")
 tbdata = f[1].data
 tbcols = f[1].columns
@@ -77,6 +78,15 @@ for j in range(0, n):
 for j in range(0, n):
     for i in range(0, m):
         standardized_data[i][j] /= sqrt(sigmasq[j])
+"""
+f = pyfits.open("../Data/modified/round1Standardized.fits")
+tbdata = f[1].data
+
+#number of training examples
+m = min(len(tbdata[truth_col]), 1000)
+
+#number of features in the above list
+n = len(interesting_cols)
         
 x = [array(standardized_data[i]) for i in range(0, m)]
 bigsigma = mat(zeros((n,n)))

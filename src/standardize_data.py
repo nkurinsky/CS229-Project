@@ -8,7 +8,7 @@ warnings.filterwarnings('error')
 f = pyfits.open("../Data/round1/round1_test_set.fits")
 tbdata = f[1].data
 tbcols = f[1].columns
-#print tbcols
+print tbcols
 interesting_cols = ['flux_radius_g', 'fwhm_world_g',
                     'x2win_world_g', 'xywin_world_g',
                     'y2win_world_g',
@@ -52,7 +52,8 @@ for j in boring_cols:
     interesting_cols.remove(j)
     n-=1
 
-print interesting_cols
+#print interesting_cols
+#print tbcols[interesting_cols]
 
 #make means 0 and variances 1 for PCA
 standardized_data = [[0.0 for i in range(0, n)] for j in range(0, m)]
@@ -77,3 +78,7 @@ for j in range(0, n):
 for j in range(0, n):
     for i in range(0, m):
         standardized_data[i][j] /= sqrt(sigmasq[j])
+        
+tbhdu = pyfits.BinTableHDU.from_columns(pyfits.ColDefs(
+   [pyfits.Column(name=interesting_cols[j], format='D', array=standardized_data[:][j]) for j in range(0, n)]))
+tbhdu.writeto('../Data/modified/round1Standardized.fits')
