@@ -21,8 +21,12 @@ print interesting_cols
 truth_col = 'mu_class_acs'
 truth = tbdata[truth_col]
 
+pts = where((truth == 1) | (truth == 2))[0]
+print(len(pts))
+truth = truth[pts]
+
 #number of training examples
-m = len(tbdata[truth_col])
+m = len(truth)
 
 #number of features in the above list
 n = len(interesting_cols)
@@ -30,7 +34,7 @@ n = len(interesting_cols)
 boring_cols = []
 for j in range(0, n):
     boring = True
-    coldata = tbdata[interesting_cols[j]]
+    coldata = tbdata[interesting_cols[j]][pts]
     for i in range(0, m):
         if coldata[i]!=0:
             boring = False
@@ -45,7 +49,8 @@ for j in boring_cols:
 standardized_data = [[0.0 for i in range(0, n)] for j in range(0, m)]
 
 for i in range(0,n):
-    newcol = preprocessing.scale(tbdata[interesting_cols[i]])
+    tempdata = tbdata[interesting_cols[i]][pts]
+    newcol = preprocessing.scale(tempdata)
     for j in range(0,m):
         standardized_data[j][i] = newcol[j]
 
