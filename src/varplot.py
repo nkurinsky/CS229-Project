@@ -9,6 +9,13 @@ def getTable(filename,usedpts=-1):
     else:
         return hdus[1].data[1:usedpts]
 
+def getTruth(filename,usedpts=-1):
+    hdus = pyfits.open(filename)
+    if(usedpts == -1):
+        return hdus[2].data
+    else:
+        return hdus[2].data[1:usedpts]
+
 def colnames(ftable):
     return ftable.columns.names
 
