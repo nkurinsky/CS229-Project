@@ -1,6 +1,5 @@
 import pyfits
 from numpy import *
-import math
 
 f = pyfits.open("../Data/round1/round1_training_set.fits")
 tbdata = f[1].data
@@ -30,7 +29,7 @@ truth = tbdata[truth_col]
 #print tbdata[interesting_cols[4]]
 
 #number of training examples
-m = min(len(tbdata[truth_col]), 50)
+m = len(tbdata[truth_col])
 
 #number of features in the above list
 n = len(interesting_cols)

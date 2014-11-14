@@ -1,21 +1,21 @@
 import pyfits
-from svmutil import *
 from numpy import *
 import warnings
 import math
-warnings.filterwarnings('error')
 
 f = pyfits.open("../Data/modified/round1Standardized.fits")
-tbdata = f[1].data
+f2 = pyfits.open("../Data/round1/round1_training_set.fits")
+standardized_data = f[1].data
+old_data = f2[1].data
 
 truth_col = 'mu_class_acs'
-truth = tbdata[truth_col]
+truth = standardized_data[truth_col]
 
 #number of training examples
-m = min(len(tbdata[truth_col]), 50)
+m = min(len(standardized_data[truth_col]), 50)
 
 #number of features in the above list
-n = len(interesting_cols)
+n = len(standardized_data[0])
         
 x = [array(standardized_data[i]) for i in range(0, m)]
 bigsigma = mat(zeros((n,n)))
