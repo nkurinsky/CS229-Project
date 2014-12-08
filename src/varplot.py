@@ -20,10 +20,12 @@ def colnames(ftable):
     return ftable.columns.names
 
 def maxfilt(x,colname):
-    if ("fwhm" in colname):
-        return 0.004
-    elif ("mag" in colname):
+    #if ("fwhm" in colname):
+    #    return 0.004
+    if ("mag" in colname):
         return 35
+    #elif ("chi2_detmodel" in colname):
+    #    return 20000
     else:
         return max(x)
     
@@ -33,12 +35,24 @@ def minfilt(x,colname):
     else:
         return min(x)
 
+def varlog(x,colname):
+    if ("chi2" in colname) or ("fwhm" in colname) or ("radius" in colname):
+        zi = (x == 0)
+        zin = (x > 0)
+        x[zi] = min(x[zin])
+        return log(abs(x))
+    else:
+        return x
+
 def varplot(fitsTable, xfield, yfield, save=False): 
     
     x = fitsTable[xfield]
     y = fitsTable[yfield]
     labels = fitsTable['mu_class_acs']
     
+    x=varlog(x,xfield)
+    y=varlog(y,yfield)
+
     s = labels == 2
     g = labels == 1
     
@@ -67,6 +81,43 @@ def varplot(fitsTable, xfield, yfield, save=False):
     
     if(save):
         savefig("varplot_"+xfield+"_"+yfield+".png")
+    else:
+        show()
+
+def vhistplot(fitsTable, field, save=False): 
+    
+    x = fitsTable[field]
+    if("chi2" in field):
+        zi = (x == 0)
+        zin = (x > 0)
+        x[zi] = min(x[zin])
+        x = log(x)
+    labels = fitsTable['mu_class_acs']
+    
+    s = labels == 2
+    g = labels == 1
+    
+    xmin = minfilt(x,field)
+    xmax = maxfilt(x,field)
+    
+    figure(figsize=[18,9])
+    
+    subplot(121)
+    hist(x[g],color='b',bins=40,log=True,range=[xmin,xmax],normed=True)
+    xlim(xmin,xmax)
+    xlabel(field)
+    ylabel("Fraction")
+    title("Galaxies")
+    
+    subplot(122)
+    hist(x[s],color='r',bins=40,log=True,range=[xmin,xmax],normed=True)
+    xlim(xmin,xmax)
+    xlabel(field)
+    ylabel("Fraction")
+    title("Stars")
+    
+    if(save):
+        savefig("histplot_"+xfield+"_"+yfield+".png")
     else:
         show()
 

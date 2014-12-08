@@ -8,8 +8,8 @@ cols=ftable.columns.names
 mycols=[]
 
 for col in cols:
-    if not ("err" in col) and not("acs" in col):
-        if ("mag_auto" in col) or ("fwhm_world" in col):
+    if not ("err" in col) and not("acs" in col) and not("threshold" in col):
+        if ("mag_auto" in col) or ("fwhm_world" in col) or ("mu_" in col) or ("chi2_" in col):
             mycols.append(col)
 
 npmycols = numpy.array(mycols)
