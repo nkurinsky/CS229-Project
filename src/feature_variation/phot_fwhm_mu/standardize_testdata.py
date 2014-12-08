@@ -5,7 +5,7 @@ import math
 from sklearn import preprocessing
 warnings.filterwarnings('ignore')
 
-f = pyfits.open("../../data/test.fits")
+f = pyfits.open("../../../../data/test.fits")
 tbdata = f[1].data
 tbcols = f[1].data.columns.names
 
@@ -13,7 +13,7 @@ interesting_cols=[]
 
 for col in tbcols:
     if not ("err" in col) and not("acs" in col) and not("threshold" in col):
-        if ("mag_auto" in col) or ("mag_detmodel" in col) or ("niter_model" in col) or ("fwhm_world" in col) or ("mu_mean" in col) or (("mu_max" in col) and not ("model" in col)) or ("chi2_" in col):
+        if ("mag_auto" in col) or ("mag_detmodel" in col) or ("fwhm_world" in col) or ("mu_mean" in col) or (("mu_max" in col) and not ("model" in col)):
             interesting_cols.append(col)
 
 for i in range(0,len(interesting_cols),5):
@@ -53,15 +53,6 @@ for i in range(0,n):
         standardized_data[j][i] = newcol[j]
 
 print(len((array(standardized_data).transpose()[1])))
-
-tbhdu = pyfits.BinTableHDU.from_columns(pyfits.ColDefs(
-   [pyfits.Column(name=interesting_cols[j], format='D', array=array(standardized_data).transpose()[j]) for j in range(0, n)]))
-print(len(tbhdu.data["fwhm_world_g"]))
-truthhdu = pyfits.BinTableHDU.from_columns(pyfits.ColDefs(
-    [pyfits.Column(name="truth", format='I', array=array(truth))]))
-
-hdulist = pyfits.HDUList([f[0],tbhdu,truthhdu])
-hdulist.writeto('../../data/round1Standardized_test.fits',clobber=True)
 
 save("sd_test.npy", array(standardized_data))
 save("truth_test.npy", array(truth))
