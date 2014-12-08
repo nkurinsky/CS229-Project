@@ -4,8 +4,8 @@ import pickle
 from sklearn.cross_validation import StratifiedKFold
 from sklearn.grid_search import GridSearchCV
 
-data = np.load("../sd.npy")
-truth = np.load("../truth.npy")
+data = np.load("sd.npy")
+truth = np.load("truth.npy")
 
 print(len(data))
 
