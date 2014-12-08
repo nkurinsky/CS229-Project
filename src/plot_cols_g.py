@@ -6,7 +6,7 @@ yfield='dec'
 
 usedpts = 100000
 
-hdus = pyfits.open("training.fits")
+hdus = pyfits.open("../../data/training.fits")
 ftable=hdus[1].data
 ftable=ftable[0:usedpts]
 

@@ -16,6 +16,10 @@ input=open("svml2.pkl",'rb')
 clfl2 = pickle.load(input)
 input.close()
 
+input=open("svm-gauss.pkl",'rb')
+clfl3 = pickle.load(input)
+input.close()
+
 testdata = np.load("sd_test.npy")
 testtruth = np.load("truth_test.npy")
 
@@ -44,6 +48,15 @@ print("Galaxies")
 print(clfl2.score(data[g],truth[g]))
 print(clfl2.score(testdata[gt],testtruth[gt]))
 
+print("\nGauss")
+#print(clfl3.score(data,truth))
+print(clfl3.score(testdata,testtruth))
+print("Stars")
+#print(clfl3.score(data[s],truth[s]))
+print(clfl3.score(testdata[st],testtruth[st]))
+print("Galaxies")
+#print(clfl3.score(data[g],truth[g]))
+print(clfl3.score(testdata[gt],testtruth[gt]))
 
 print("Galaxy Number")
 print(len(g))

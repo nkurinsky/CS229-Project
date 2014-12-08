@@ -13,10 +13,14 @@ interesting_cols=[]
 
 for col in tbcols:
     if not ("err" in col) and not("acs" in col) and not("threshold" in col):
-        if ("mag_auto" in col) or ("fwhm_world" in col) or ("mu_" in col) or ("chi2_" in col):
+        if ("mag_auto" in col) or ("mag_detmodel" in col) or ("niter_model" in col) or ("fwhm_world" in col) or ("mu_mean" in col) or (("mu_max" in col) and not ("model" in col)) or ("chi2_" in col):
             interesting_cols.append(col)
 
-print interesting_cols
+for i in range(0,len(interesting_cols),5):
+    printstring=""
+    for j in range(0,5):
+        printstring=printstring+interesting_cols[i+j]+" "
+    print printstring 
 
 truth_col = 'mu_class_acs'
 truth = tbdata[truth_col]
@@ -31,25 +35,19 @@ m = len(truth)
 #number of features in the above list
 n = len(interesting_cols)
 
-boring_cols = []
-for j in range(0, n):
-    boring = True
-    coldata = tbdata[interesting_cols[j]][pts]
-    for i in range(0, m):
-        if coldata[i]!=0:
-            boring = False
-            break
-    if boring:
-        boring_cols.append(interesting_cols[j])
-for j in boring_cols:
-    interesting_cols.remove(j)
-    n-=1
-
 #make means 0 and variances 1 for PCA
 standardized_data = [[0.0 for i in range(0, n)] for j in range(0, m)]
 
 for i in range(0,n):
-    tempdata = tbdata[interesting_cols[i]][pts]
+    colname=interesting_cols[i]
+    tempdata = tbdata[colname][pts]
+    if ("chi2" in colname) or ("fwhm" in colname):
+        print "Logging "+colname
+        zi = (tempdata == 0)
+        zin = (tempdata > 0)
+        tempdata[zi] = min(tempdata[zin])
+        tempdata = log10(abs(tempdata))
+
     newcol = preprocessing.scale(tempdata)
     for j in range(0,m):
         standardized_data[j][i] = newcol[j]
