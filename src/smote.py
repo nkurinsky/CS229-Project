@@ -16,7 +16,7 @@ n = data.shape[1]
 T = stars.shape[0]
 
 # amount of synthetic oversampling
-N = 500
+N = 500000
 
 # number of nearest neighbors
 k = 5
@@ -45,6 +45,10 @@ for i in range(T):
         
 newdata = np.concatenate((data, S))
 newtruth = np.concatenate((truth, 2*np.ones(n_synthetic_samples)))
+
+print S
+
+print data.shape
 
 np.save("sd_smote.npy", np.array(newdata))
 np.save("truth_smote.npy", np.array(newtruth))
