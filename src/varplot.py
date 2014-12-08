@@ -1,6 +1,7 @@
 import pyfits
 from pylab import *
 import numpy
+from matplotlib.pyplot import hist2d
 
 def getTable(filename,usedpts=-1):
     hdus = pyfits.open(filename)
@@ -64,7 +65,8 @@ def varplot(fitsTable, xfield, yfield, save=False):
     figure(figsize=[18,9])
     
     subplot(121)
-    scatter(x[g],y[g],s=1,color='b')
+    #scatter(x[g],y[g],s=1,color='b')
+    hist2d(x[g],y[g])
     xlim(xmin,xmax)
     ylim(ymin,ymax)
     xlabel(xfield)
@@ -72,7 +74,8 @@ def varplot(fitsTable, xfield, yfield, save=False):
     title("Galaxies")
     
     subplot(122)
-    scatter(x[s],y[s],s=1,color='r')
+    #scatter(x[s],y[s],s=1,color='r')
+    hist2d(x[s],y[s])
     xlim(xmin,xmax)
     ylim(ymin,ymax)
     xlabel(xfield)
