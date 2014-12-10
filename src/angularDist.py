@@ -6,7 +6,7 @@ from sklearn import preprocessing
 from sklearn.neighbors import NearestNeighbors,DistanceMetric
 warnings.filterwarnings('ignore')
 
-f = pyfits.open("../data/round1/round1_training_set.fits")
+f = pyfits.open("round1_training_set.fits")
 tbdata = f[1].data
 tbcols = f[1].data.columns.names
 
