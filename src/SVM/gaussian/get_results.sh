@@ -5,9 +5,9 @@ files=$(ls *.o*)
 if [ $# -gt 0 ]
 then
     outfile=$1
-    echo "Writing results to "$file
-    rm $file
-    echo -e "C\t\tGamma\t\tTrain\t\tTest\t\tGalaxies\tStars\t\tRatio" > $file
+    echo "Writing results to "$outfile
+    rm $outfile
+    echo -e "C\t\tGamma\t\tTrain\t\tTest\t\tGalaxies\tStars\t\tRatio" > $outfile
 fi
 
 echo -e "C\t\tGamma\t\tTrain\t\tTest\t\tGalaxies\tStars\t\tRatio"
@@ -28,13 +28,13 @@ do
 	echo -e $c"    \t"$gamma"    \t"$train"\t"$test"\t"$gals"\t"$stars"\t"$ratio
 	if [ $# -gt 0 ]
 	then
-	    echo -e $c"    \t"$gamma"    \t"$train"\t"$test"\t"$gals"\t"$stars"\t"$ratio >> $file
+	    echo -e $c"    \t"$gamma"    \t"$train"\t"$test"\t"$gals"\t"$stars"\t"$ratio >> $outfile
 	fi
     else
 	echo -e $c"    \t"$gamma"    \t0.00\t\t0.00\t\t0.00\t\t0.00\t\t1.00"
 	if [ $# -gt 0 ]
         then
-	    echo -e $c"    \t"$gamma"    \t0.00\t0.00\t0.00\t0.00\t1.0" >> $file
+	    echo -e $c"    \t"$gamma"    \t0.00\t0.00\t0.00\t0.00\t1.0" >> $outfile
 	fi
     fi
 done
