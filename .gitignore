@@ -41,3 +41,4 @@ libsvm-3.19/*
 
 #Python
 *.pyc
+*.pkl

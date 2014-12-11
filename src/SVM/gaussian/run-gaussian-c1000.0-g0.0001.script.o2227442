@@ -1,0 +1,13 @@
+C = 1000.0
+Gamma = 0.0001
+SVC(C=1000.0, cache_size=2000, class_weight='auto', coef0=0.0, degree=3,
+  gamma=0.0001, kernel='rbf', max_iter=-1, probability=False,
+  random_state=None, shrinking=False, tol=0.001, verbose=False)
+0.936599703984
+0.933056768559
+Stars
+0.811661647961
+0.803690317672
+Galaxies
+0.946898128648
+0.943776303138

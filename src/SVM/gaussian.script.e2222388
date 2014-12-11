@@ -1,6 +1,0 @@
-[Parallel(n_jobs=1)]: Done   1 jobs       | elapsed: 68.1min
-[Parallel(n_jobs=1)]: Done   2 jobs       | elapsed: 141.8min
-[Parallel(n_jobs=1)]: Done   5 jobs       | elapsed: 369.5min
-[Parallel(n_jobs=1)]: Done   8 jobs       | elapsed: 548.9min
-[Parallel(n_jobs=1)]: Done  13 jobs       | elapsed: 746.6min
-[Parallel(n_jobs=1)]: Done  18 jobs       | elapsed: 1168.1min
