@@ -1,7 +1,6 @@
 import pyfits
 from pylab import *
 import numpy
-from matplotlib.pyplot import hist2d
 
 def getTable(filename,usedpts=-1):
     hdus = pyfits.open(filename)
@@ -21,10 +20,10 @@ def colnames(ftable):
     return ftable.columns.names
 
 def maxfilt(x,colname):
-    #if ("fwhm" in colname):
-    #    return 0.004
-    if ("mag" in colname):
-        return 35
+    if ("fwhm" in colname):
+        return -5
+    elif ("mag" in colname):
+        return 32
     #elif ("chi2_detmodel" in colname):
     #    return 20000
     else:
@@ -33,6 +32,10 @@ def maxfilt(x,colname):
 def minfilt(x,colname):
     if("Separation" in colname):
         return 0
+    elif("fwhm" in colname):
+        return -10
+    elif ("mag" in colname):
+        return 14
     else:
         return min(x)
 
@@ -62,25 +65,21 @@ def varplot(fitsTable, xfield, yfield, save=False):
     ymin = minfilt(y,yfield)
     ymax = maxfilt(y,yfield)
     
-    figure(figsize=[18,9])
-    
-    subplot(121)
-    #scatter(x[g],y[g],s=1,color='b')
-    hist2d(x[g],y[g])
+    figure()
+    h,xh,yh=histogram2d(y[g],x[g],bins=100,normed=True)
+    contourf(h,colors='b',levels=[1.0,0.5,0.1,0.05,0.01,0.005,0.001,0.0005],extent=[yh[0], yh[-1], xh[0], xh[-1]],label="Galaxies",alpha=0.2)
+    h,xh,yh=histogram2d(y[s],x[s],bins=100,normed=True)
+    cs = contourf(h,colors='r',levels=[1.0,0.5,0.1,0.05,0.01,0.005],extent=[yh[0], yh[-1], xh[0], xh[-1]],label="Stars",alpha=0.2)
+
     xlim(xmin,xmax)
     ylim(ymin,ymax)
     xlabel(xfield)
     ylabel(yfield)
-    title("Galaxies")
     
-    subplot(122)
-    #scatter(x[s],y[s],s=1,color='r')
-    hist2d(x[s],y[s])
-    xlim(xmin,xmax)
-    ylim(ymin,ymax)
-    xlabel(xfield)
-    ylabel(yfield)
-    title("Stars")
+    proxy = [Rectangle((0,0),1,1,fc = pc) 
+             for pc in ['r','b']]
+    
+    legend(proxy,["Stars","Galaxies"],loc="upper right")
     
     if(save):
         savefig("varplot_"+xfield+"_"+yfield+".png")
@@ -103,27 +102,23 @@ def vhistplot(fitsTable, field, save=False):
     xmin = minfilt(x,field)
     xmax = maxfilt(x,field)
     
-    figure(figsize=[18,9])
-    
-    subplot(121)
-    hist(x[g],color='b',bins=40,log=True,range=[xmin,xmax],normed=True)
+    figure()
+    hist([x[g],x[s]],color=['b','r'],bins=40,normed=True,histtype='stepfilled',label=["Galaxies","Stars"],alpha=0.5,range=[xmin,xmax])
     xlim(xmin,xmax)
+    ylim(0,0.2)
     xlabel(field)
     ylabel("Fraction")
-    title("Galaxies")
-    
-    subplot(122)
-    hist(x[s],color='r',bins=40,log=True,range=[xmin,xmax],normed=True)
-    xlim(xmin,xmax)
-    xlabel(field)
-    ylabel("Fraction")
-    title("Stars")
+    legend(loc='upper right')
     
     if(save):
-        savefig("histplot_"+xfield+"_"+yfield+".png")
+        savefig("histplot_"+field+".png")
     else:
         show()
 
 def trainplot(filename,xfield, yfield, save=False,usedpts=100000):
     ftable=getTable(filename,usedpts)
     varplot(ftable,xfield,yfield,save=save)
+
+def hplot(field,save=False):
+    mytab=getTable("../../data/training.fits")
+    vhistplot(mytab,field,save=save)
