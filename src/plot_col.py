@@ -1,8 +1,5 @@
 from varplot import *
 
-usedpts = 100000
-ftable=getTable("training.fits",usedpts)
-
-varplot(ftable, "mag_auto_i", "fwhm_world_i", save=False)
-
-#or use trainplot("training.fits","mag_auto_g","fwhm_world_g")
+ftable=getTable("../../data/training.fits")
+#vhistplot(ftable, "mag_auto_g", save=False)
+varplot(ftable,"mag_auto_y","fwhm_world_y")
